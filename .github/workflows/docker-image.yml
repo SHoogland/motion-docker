@@ -17,7 +17,10 @@ jobs:
     - name: Build the Docker image
       run: |
         docker buildx inspect
+        docker run --rm --privileged docker/binfmt
+        ls /proc/sys/fs/binfmt_misc/
         docker run --rm arm32v7/alpine ls
+
 #       run: docker buildx build --platform linux/arm/v7 . --tag ghcr.io/shoogland/motion-docker:$GITHUB_SHA --tag ghcr.io/shoogland/motion-docker:latest
 
 #     - name: Push to GitHub Packages
