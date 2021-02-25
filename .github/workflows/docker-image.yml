@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker buildx build --platform linux/arm/v7 . --tag ghcr.io/shoogland/motion-docker:$GITHUB_SHA --tag ghcr.io/shoogland/motion-docker:latest
+
+#     - name: Push to GitHub Packages
+#       run: |
+#         echo ${{ secrets.PAT }} | docker login ghcr.io -u shoogland --password-stdin
+#         docker build . --tag ghcr.io/shoogland/shoogland-com:$GITHUB_SHA --tag ghcr.io/shoogland/shoogland-com:latest
+#         docker push ghcr.io/shoogland/shoogland-com:latest
+#         docker push ghcr.io/shoogland/shoogland-com:$GITHUB_SHA
