@@ -20,9 +20,9 @@ jobs:
         docker buildx build --platform linux/arm/v7 . --tag ghcr.io/shoogland/motion-docker:$GITHUB_SHA --tag ghcr.io/shoogland/motion-docker:latest
         docker image inspect ghcr.io/shoogland/motion-docker:latest
 
-#     - name: Push to GitHub Packages
-#       run: |
-#         echo ${{ secrets.PAT }} | docker login ghcr.io -u shoogland --password-stdin
-#         docker build . --tag ghcr.io/shoogland/shoogland-com:$GITHUB_SHA --tag ghcr.io/shoogland/shoogland-com:latest
-#         docker push ghcr.io/shoogland/shoogland-com:latest
-#         docker push ghcr.io/shoogland/shoogland-com:$GITHUB_SHA
+    - name: Push to GitHub Packages
+      run: |
+        echo ${{ secrets.PAT }} | docker login ghcr.io -u shoogland --password-stdin
+        docker build . --tag ghcr.io/shoogland/motion-docker:$GITHUB_SHA --tag ghcr.io/shoogland/motion-docker:latest
+        docker push ghcr.io/shoogland/motion-docker:latest
+        docker push ghcr.io/shoogland/motion-docker:$GITHUB_SHA
