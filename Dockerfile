@@ -5,6 +5,8 @@ LABEL "org.opencontainers.image.source"="https://github.com/SHoogland/motion-doc
 RUN apt-get update
 RUN apt-get install motion --yes
 
+USER motion
+
 # R/W needed for motion to update configurations
 VOLUME /usr/local/etc/motion
 # R/W needed for motion to update Video & images
